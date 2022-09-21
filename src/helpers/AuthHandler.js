@@ -7,8 +7,12 @@ export const isLogged = () => {
 
 export const doLogin = (token, rememberPassword = false) => {
     if(rememberPassword){
-        Cookies.set('token', token, {expires:365 })
+        Cookies.set('token', token, {expires:365 });
     }else{
-        Cookies.set('token', token)
+        Cookies.set('token', token);
     }
+}
+
+export const doLogout = () => {
+    Cookies.remove('token');
 }
