@@ -6,6 +6,7 @@ export const PageArea = styled.div`
         border-radius: 3px;
         padding: 10px;
         box-shadow: 0px 0px 3px #999;
+        margin-bottom: 20px;
 
         .area{
             display: flex;
