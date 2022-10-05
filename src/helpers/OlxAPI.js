@@ -72,7 +72,7 @@ const OlxAPI = {
         return json.categories;
     },
 
-    getAds: async (options) => {
+    getAd: async (options) => {
         const json = await apiFetchGet(
             '/ad/list',
             options

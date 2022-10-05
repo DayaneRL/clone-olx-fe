@@ -22,7 +22,7 @@ const Page = () => {
             setStateList(list);
         }
         getStates();
-    }, []);
+    }, [api]);
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
