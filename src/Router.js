@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import RouterHandler from './components/RouterHandler';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -12,24 +13,24 @@ export default () => {
     return(
         <Switch>
 
-            <Route exact path="/">
+            <RouterHandler  exact path="/">
                 <Home/>
-            </Route>
-            <Route exact path="/About">
+            </RouterHandler >
+            <RouterHandler  exact path="/About">
                 <About/>
-            </Route>
-            <Route exact path="/SignIn">
+            </RouterHandler >
+            <RouterHandler  exact path="/SignIn">
                 <SignIn/>
-            </Route>
-            <Route exact path="/SignUp">
+            </RouterHandler >
+            <RouterHandler  exact path="/SignUp">
                 <SignUp/>
-            </Route>
-            <Route exact path="/ad/:id">
+            </RouterHandler >
+            <RouterHandler  exact path="/ad/:id">
                 <AdPage/>
-            </Route>
-            <Route path="*">
+            </RouterHandler >
+            <RouterHandler  path="*">
                 <NotFound/>
-            </Route>
+            </RouterHandler >
             
         </Switch>
     )

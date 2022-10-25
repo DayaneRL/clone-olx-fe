@@ -3,6 +3,12 @@ import qs from 'qs';
 
 const BASE_API = '';
 
+const apiFetchFile = async (endpoint, body) => {
+    if(!body.token){
+
+    }
+}
+
 const apiFetchPost = async (endpoint, body) => {
     if(!body.token) {
         let token = Cookies.get('token');
@@ -76,6 +82,14 @@ const OlxAPI = {
         const json = await apiFetchGet(
             '/ad/list',
             options
+        );
+        return json;
+    },
+
+    addAd: async (fData) => {
+        const json = await apiFetchFile(
+            '/ad/add',
+            fData
         );
         return json;
     }

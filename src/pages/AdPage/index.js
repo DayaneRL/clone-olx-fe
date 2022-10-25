@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { 
+    useParams,
+    Link
+} from 'react-router-dom';
 import { Slide } from "react-slideshow-image";
 import 'react-slideshow-image/dist/styles.css';
-import { PageArea, Fake, OthersArea } from "./styled";
+import { PageArea, Fake, OthersArea, BreadChumb } from "./styled";
 import { PageContainer } from "../../components/MainComponents";
 import useApi from '../../helpers/OlxAPI';
 import AdItem from '../../components/partials/AdItem';
@@ -39,6 +42,29 @@ const Page = () => {
 
     return (
         <PageContainer>
+            {adInfo.category &&
+                <BreadChumb>
+                    Você está em:
+                    <Link
+                        to="/"
+                    >
+                        Home
+                    </Link>
+                    /
+                    <Link
+                        to={`/ads?state=${adInfo.stateName}`}
+                    >
+                        {adInfo.stateName}
+                    </Link>
+                    /
+                    <Link
+                        to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}
+                    >
+                        {adInfo.category.name}
+                    </Link>
+                    / {adInfo.title}
+                </BreadChumb>
+            }
             <PageArea>
                 <div className="leftSide">
                     <div className="box">
