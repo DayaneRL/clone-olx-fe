@@ -2,7 +2,8 @@ import
     React, 
     { 
         useState, 
-        useEffect 
+        useEffect, 
+        useRef
     } from 'react';
 import MaskedInput from 'react-text-mask';
 import { createNumberMask } from 'text-mask-addons';
@@ -13,10 +14,11 @@ import {
     ErrorMessage 
 } from '../../components/MainComponents';
 import useApi from '../../helpers/OlxAPI';
+import { useHistory } from 'react-router-dom';
 
 const Page = () => {
     const api = useApi();
-
+    const history = useHistory();
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
@@ -25,6 +27,7 @@ const Page = () => {
     const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState('');
+    const fileField = useRef(null);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -38,8 +41,34 @@ const Page = () => {
         e.preventDefault();
         setDisabled(true);
         setError('');
-        
-        
+        let errors = [];
+        if(!title.trim()) {
+            errors.push("O título é obrigatório");
+        }
+        if(!category.trim()) {
+            errors.push("É obrigatório escolher uma categoria");
+        }
+        if(errors.length === 0) {
+            const fData = new FormData();
+            fData.append("title", title);
+            fData.append("price", price);
+            fData.append('priceneg', priceNegotiable);
+            fData.append("desc", description);
+            fData.append("cat", category);
+            if(fileField.current.files.length > 0) {
+                for(let i = 0; i < fileField.current.files.length; i++) {
+                    fData.append("img", fileField.current.files[i]);
+                }
+            }
+            const response = await api.addAd(fData);
+            if(!response.error) {
+                history.push(`/ad/${response.id}`);
+            } else {
+                setError(response.error);
+            }
+        } else {
+            setError(errors.join("\n"));
+        }
         setDisabled(false);
     }
 
@@ -133,7 +162,7 @@ const Page = () => {
                         <div className="area--input">
                             <textarea
                                 disabled={disabled}
-                                value={desciption}
+                                value={description}
                                 onChange={e => setDescription(e.target.value)}
                             >
                             </textarea>

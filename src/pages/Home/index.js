@@ -36,8 +36,6 @@ const Page = () => {
 
     return (
         <div>
-            {/* <h2>Home</h2> */}
-            {/* <Link to='/about'>Sobre</Link> */}
             <SearchArea>
                 <PageContainer>
                     <div className="searchBox">
@@ -45,18 +43,18 @@ const Page = () => {
                             <input type="text" name="query" 
                                 placeholder="O que você procura?"/>
                                 <select name="state">
-                                    {stateList.map((item, key)=>{
+                                    {stateList.map((item, key)=>
                                         <option key={key} value={item.name}>
                                             {item.name}
                                         </option>
-                                    })}
+                                    )}
                                 </select>
                                 <button>Presquisar</button>
                         </form>
                     </div>
 
                     <div className="categoryList">
-                        {categories.map((item, key)=>{
+                        {categories.map((item, key)=>
                             <Link
                                 key={key}
                                 to={`/ads?cat=${item.slug}`}
@@ -65,7 +63,7 @@ const Page = () => {
                                 <img src={item.img} alt="" />
                                 <span>{item.name}</span>
                             </Link>
-                        })}
+                        )}
                     </div>
                 </PageContainer>
             </SearchArea>
@@ -74,9 +72,9 @@ const Page = () => {
                 <PageArea>
                     <h2>Anúncios Recentes</h2>
                     <div className="list">
-                        {adList.map((i,k)=>{
+                        {adList.map((i,k)=>
                             <AdItem key={k} data={i}/>
-                        })}
+                        )}
                     </div>
                     <Link to="/ads" className="seeAllLink">Ver todos</Link>
                     <hr/>

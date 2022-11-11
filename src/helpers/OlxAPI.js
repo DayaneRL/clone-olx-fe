@@ -4,9 +4,22 @@ import qs from 'qs';
 const BASE_API = '';
 
 const apiFetchFile = async (endpoint, body) => {
-    if(!body.token){
-
+    if(!body.token) {
+        let token = Cookies.get('token');
+        if (token) {
+            body.append('token', token);
+        }
     }
+    const res = await fetch(BASE_API + endpoint, {
+        method: 'POST',
+        body
+    });
+    const json = await res.json();
+    if(json.notallowed) {
+        window.location.href = '/signin';
+        return;
+    }
+    return json;
 }
 
 const apiFetchPost = async (endpoint, body) => {

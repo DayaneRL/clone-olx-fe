@@ -9,7 +9,6 @@ import { PageArea, Fake, OthersArea, BreadChumb } from "./styled";
 import { PageContainer } from "../../components/MainComponents";
 import useApi from '../../helpers/OlxAPI';
 import AdItem from '../../components/partials/AdItem';
-import './styled';
 
 const Page = () => {
     const api = useApi();
@@ -45,21 +44,15 @@ const Page = () => {
             {adInfo.category &&
                 <BreadChumb>
                     Você está em:
-                    <Link
-                        to="/"
-                    >
+                    <Link to="/" >
                         Home
                     </Link>
                     /
-                    <Link
-                        to={`/ads?state=${adInfo.stateName}`}
-                    >
+                    <Link to={`/ads?state=${adInfo.stateName}`} >
                         {adInfo.stateName}
                     </Link>
                     /
-                    <Link
-                        to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}
-                    >
+                    <Link to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`} >
                         {adInfo.category.name}
                     </Link>
                     / {adInfo.title}
@@ -102,7 +95,10 @@ const Page = () => {
                 <div className="rightSide">
                     <div className="box box--padding">
                         {loading && <Fake height={20}/> }
-                        {adInfo.priceNegotiabled && adInfo.price &&
+                        {adInfo.priceNegotiabled && 
+                            "Preço Negociável"
+                        }
+                        {!adInfo.priceNegotiabled && adInfo.price &&
                             <div className="price">
                                 Preço: <span>R$ {adInfo.price}</span>
                             </div>
@@ -111,7 +107,7 @@ const Page = () => {
                     {loading && <Fake height={50}/>}
                     {adInfo.userInfo &&
                         <>
-                            <a href={`mailto:${adInfo.userInfo.email}`}
+                             <a href={`mailto:${adInfo.userInfo.email}`}
                                 target="_blank"
                                 className="contactSellerLink"
                             > Fale com o vendedor </a>

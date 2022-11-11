@@ -4,7 +4,6 @@ import { PageArea } from "./styled";
 import { PageContainer } from "../../components/MainComponents";
 import useApi from '../../helpers/OlxAPI';
 import AdItem from '../../components/partials/AdItem';
-import './styled';
 
 let timer;
 
@@ -47,13 +46,12 @@ const Page = () => {
     const [stateList, setStateList] = useState([]);
     const [categories, setCategories] = useState([]);
     const [adList, setAdList] = useState([]);
-    const [currenctPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const [resultOpacity, setResultOpacity] = useState(1);
     const [adsTotal, setAdsTotal] = useState(0);
     const [pageCount, setPageCount] = useState(0);
     const [warningMessage, setWarningMessage] = useState('Carregando...');
     const [loading, setLoading] = useState(true);
-    const [pagination, setPagination] = useState(0);
     
     useEffect(()=> {
         const getState = async () => {
@@ -67,13 +65,43 @@ const Page = () => {
             setCategories(catList);
         }
         getCategories();
-    },[]);
+    },[api]);
 
     const getAdsList = async () => {
-        setLoading(true);
-        let offset = 0;
-        offset = (currenctPage - 1) * 9;
-    }
+		setLoading(true);
+		let offset = 0;
+		offset = (currentPage - 1) * 9;
+		const Ads = await api.getAds({
+			sort: 'desc',
+			limit: 9,
+			q,
+			cat,
+			state,
+			offset
+		});
+		setAdList(Ads.ads);
+		setAdsTotal(Ads.total);
+		setResultOpacity(1);
+		setLoading(false);
+	}
+
+    useEffect(() => {
+		if(adsTotal > 0) {
+			setPageCount(Math.ceil(adsTotal / adList.length));
+		} else {
+			setPageCount(0)
+		}
+	}, [adsTotal]);
+
+	useEffect(() => {
+		setResultOpacity(0.3);
+		getAdsList();
+	}, []);
+
+	let pagination = [];
+	for(let i = 0; i <= pageCount; i++) {
+		pagination.push(i + 1);
+	}
 
     return (
         <div>
@@ -128,7 +156,7 @@ const Page = () => {
                         </div>
                         <div className="pagination">
                             {pagination.map((pg, index) =>
-                                <div onClick={()=> setCurrentPage(pg)} className={pg===currenctPage ? 'pagItem active' : 'pagItem'}>
+                                <div key={index} onClick={()=> setCurrentPage(pg)} className={pg===currentPage ? 'pagItem active' : 'pagItem'}>
                                     {pg}
                                 </div>
                             )}

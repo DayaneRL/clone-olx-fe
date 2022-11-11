@@ -21,13 +21,13 @@ const Header = () => {
                         {!logged && 
                             <>
                                 <li>
-                                    <Link to="/SignIn">Login</Link>
+                                    <Link to="/signin">Login</Link>
                                 </li>
                                 <li>
                                     <Link to="/signup">Cadastrar</Link>
                                 </li>
                                 <li>
-                                    <Link to="/SignIn" className="button">
+                                    <Link to="/signin" className="button">
                                         Postar um Anúncio</Link>
                                 </li>
                             </>
