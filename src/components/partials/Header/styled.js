@@ -49,7 +49,7 @@ export const HeaderArea = styled.div`
         li{
             margin: 0 20px;
 
-            a{
+            a, button{
                 color: #000;
                 font-size: 14px;
                 

@@ -85,7 +85,7 @@ const Page = () => {
                     <label className="area">
                         <div className="area--title"></div>
                         <div className="area--input">
-                            <button>Fazer login</button>
+                            <button type="submit">Fazer login</button>
                         </div>
                     </label>
                 </form>

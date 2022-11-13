@@ -8,6 +8,8 @@ import NotFound from './pages/NotFound';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import AdPage from './pages/AdPage';
+import AddAd from './pages/AddAd';
+import EditAd from './pages/EditAd';
 import MyAccount from './pages/MyAccount';
 
 export default () => {
@@ -31,6 +33,12 @@ export default () => {
             </RouterHandler >
             <RouterHandler private exact path="/my-account">
                 <MyAccount />
+            </RouterHandler>
+            <RouterHandler exact path="/post-an-ad">
+                <AddAd />
+            </RouterHandler>
+            <RouterHandler exact path="/edit-ad/:id">
+                <EditAd />
             </RouterHandler>
             <RouterHandler  path="*">
                 <NotFound/>

@@ -63,11 +63,11 @@ const Page = () => {
 
                     <label className="area">
                         <div className="area--title">
-                            Estado
+                        Nome Completo
                         </div>
                         <div className="area--input">
                             <input 
-                                type="texto" 
+                                type="text" 
                                 disabled={disabled} 
                                 value={name} 
                                 onChange={(e)=>setName(e.target.value)}
